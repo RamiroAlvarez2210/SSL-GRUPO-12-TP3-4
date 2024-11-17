@@ -3,16 +3,16 @@
 %}
 %option noyywrap
 DIGITO [0-9]
-CONSTANTE {DIGITO}({DIGITO})*
+const {DIGITO}({DIGITO})*
 LETRA [a-zA-Z]
 IDENTIFICADOR {LETRA}({LETRA}|{DIGITO})*
 %%
-{CONSTANTE}     printf("Constante\n");
+{const}         {return CONSTANTE;}
 "inicio"        {return INICIO;}
 "fin"           {return FIN;}
 "leer"          {return LEER;}
 "escribir"      {return ESCRIBIR;}
-{IDENTIFICADOR} printf("ID\n");
+{IDENTIFICADOR} {return ID;}
 %%
 int main()
 {
