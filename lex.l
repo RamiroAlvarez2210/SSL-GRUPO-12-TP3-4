@@ -1,5 +1,6 @@
 %{
 	#include <stdio.h>
+    #include "y.tab.h"
 %}
 %option noyywrap
 DIGITO [0-9]
@@ -13,9 +14,7 @@ IDENTIFICADOR {LETRA}({LETRA}|{DIGITO})*
 "leer"          {return LEER;}
 "escribir"      {return ESCRIBIR;}
 {IDENTIFICADOR} {return ID;}
+"+"             {return SUMA;}
+"-"             {return RESTA;}
+":="            {return ASIGNACION;}
 %%
-int main()
-{
-    yylex();
-    return 0;
-}
