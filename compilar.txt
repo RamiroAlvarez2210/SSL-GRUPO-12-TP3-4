@@ -1,0 +1,3 @@
+bison -yd bison.y
+flex lex.l
+gcc y.tab.c lex.yy.c -o eje
