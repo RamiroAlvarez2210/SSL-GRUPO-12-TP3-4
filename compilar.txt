@@ -1,3 +1,7 @@
-bison -yd bison.y
-flex lex.l
+bison -yd microbison.y
+flex micro.l
 gcc y.tab.c lex.yy.c -o eje
+
+
+Pruebas:
+Si pones fin fdt no podes poner nada despues o va a dar error porque es el final
