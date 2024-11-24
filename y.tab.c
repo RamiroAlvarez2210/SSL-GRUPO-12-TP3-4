@@ -1704,10 +1704,6 @@ void existeElID(RegTS TS[1000],int espaciosOcupado){
     if((espaciosOcupado)!=1){
         ordenadorDeListas(TS,espaciosOcupado-1);}
 
-    int i =0;
-    for(i;i<espaciosOcupado;i++){
-        printf ("%s\n",TS[i]);
-    }
     resultado = busquedaBinaria(TS,espaciosOcupado-1,yytext);
 
     if(resultado == -1){
