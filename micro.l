@@ -21,7 +21,7 @@ digito [0-9]
 ")"                  {return PARENTESISDERECHO;}
 ","                  {return COMA;}
 ";"                  {return PUNTOCOMA;}
-" "                  {printf("ESPACIO\n");}
+" "                  {}
 .                    {yyerror("ERROR LEXICO");}
 %%
 void yyerror (char *s){
