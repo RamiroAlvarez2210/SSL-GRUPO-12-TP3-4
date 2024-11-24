@@ -1,0 +1,2 @@
+gcc micro.c -o compilar.exe 
+compilar.exe prueba.m
