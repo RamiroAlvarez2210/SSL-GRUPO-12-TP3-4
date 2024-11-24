@@ -1,9 +1,6 @@
 inicio ff:=4+3;
 
 ffff:=8;
-ffff:=9;
-ffff:=9;
-ffff:=9;
 
-fff:=9;
+fff:=9 + fff;
 fin fdt

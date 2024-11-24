@@ -15,6 +15,7 @@ typedef struct {
 void guardarIdentificador(RegTS [],int*);
 void ordenadorDeListas(RegTS [],int);
 int busquedaBinaria(RegTS [], int, char*);
+void existeElID(RegTS [],int);
 
 RegTS TS[1000];
 int espaciosOcupado = 0;
@@ -36,7 +37,7 @@ programa:INICIO listasentencias FIN
 listasentencias:sentencia
 |listasentencias sentencia
 ;
-sentencia:identificador ASIGNACION expresion PUNTOCOMA
+sentencia:identificador {if(yyleng>32)yyerror("ERROR SEMANTICO POR EXCESO DE CARACTERES\n");guardarIdentificador(TS,&espaciosOcupado);} ASIGNACION expresion PUNTOCOMA
 |LEER PARENTESISIZQUIERDO listaidentificadores PARENTESISDERECHO PUNTOCOMA
 |ESCRIBIR PARENTESISIZQUIERDO listaexpresiones PARENTESISDERECHO PUNTOCOMA
 ;
@@ -47,16 +48,16 @@ listaexpresiones:expresion
 |listaexpresiones COMA expresion
 ;
 expresion:primaria
-|expresion operadoraditivo primaria
+|expresion operadoraditivo primaria 
 ;
-primaria:identificador
+primaria:identificador {existeElID(TS,espaciosOcupado);}
 |CONSTANTE
 |PARENTESISIZQUIERDO expresion PARENTESISDERECHO
 ;
 operadoraditivo:MAS
 |RESTA
 ;
-identificador:ID {if(yyleng>32)yyerror("ERROR LEXICO\n");guardarIdentificador(TS,&espaciosOcupado);}
+identificador:ID
 ;
 %%
 int main(){
@@ -64,11 +65,9 @@ yyparse();
 }
 
 void guardarIdentificador(RegTS TS[1000], int *espaciosOcupado){
-    printf ("MESSI123 %d\n",*espaciosOcupado);
     if(*espaciosOcupado == 0){
         strncpy(TS[*espaciosOcupado].nombre, yytext, 32);
         (*espaciosOcupado)++;
-        printf ("MESSI %d\n",*espaciosOcupado);
     }else{
     if((*espaciosOcupado)!=1){
         ordenadorDeListas(TS,*espaciosOcupado);}
@@ -85,8 +84,10 @@ void guardarIdentificador(RegTS TS[1000], int *espaciosOcupado){
 
 void ordenadorDeListas(RegTS TS[1000],int espaciosOcupado){
     char temp[32+1];
-    for (int i = 0; i < espaciosOcupado - 1; i++) {
-        for (int j = 0; j < espaciosOcupado - i - 1; j++) {
+    int i = 0;
+    int j = 0;
+    for (i; i < espaciosOcupado - 1; i++) {
+        for (j; j < espaciosOcupado - i - 1; j++) {
             if (strcmp(TS[j].nombre, TS[j + 1].nombre) > 0) {
                 strcpy(temp, TS[j].nombre);
                 strcpy(TS[j].nombre, TS[j + 1].nombre);
@@ -115,4 +116,25 @@ int busquedaBinaria(RegTS TS[1000],int espaciosOcupado,char* clave) {
     }
 
     return -1;
+}
+
+void existeElID(RegTS TS[1000],int espaciosOcupado){
+    if(espaciosOcupado == 0){
+        yyerror("ERROR SEMANTICO, ESE ID NO TIENE NINGUN VALOR REGISTRADO\n");
+
+    }
+    
+    if((espaciosOcupado)!=1){
+        ordenadorDeListas(TS,espaciosOcupado-1);}
+
+    int i =0;
+    for(i;i<espaciosOcupado;i++){
+        printf ("%s\n",TS[i]);
+    }
+    resultado = busquedaBinaria(TS,espaciosOcupado-1,yytext);
+
+    if(resultado == -1){
+        yyerror("ERROR SEMANTICO, ESE ID NO TIENE NINGUN VALOR REGISTRADO\n");
+    }
+
 }
