@@ -1,7 +1,6 @@
 bison -yd microbison.y
 flex micro.l
 gcc y.tab.c lex.yy.c -o eje
-eje < prueba1.txt
 
 
 Pruebas:
