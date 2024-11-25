@@ -1,2 +1,4 @@
-gcc micro.c -o compilar.exe 
-compilar.exe prueba.m
+gcc micro.c -o compilador.exe 
+compilar.exe correcto.m
+compilar.exe errorLexico.m
+compilar.exe errorSinSem.m
