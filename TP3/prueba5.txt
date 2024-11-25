@@ -1,4 +1,5 @@
-inicio ff:=4+3;
+inicio 
+ff:=4+3;
 
 ffff:=8;
 

@@ -1,0 +1,4 @@
+inicio
+f:=4;
+f:=8;
+fin fdt

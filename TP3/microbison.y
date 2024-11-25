@@ -37,7 +37,7 @@ programa:INICIO listasentencias FIN
 listasentencias:sentencia
 |listasentencias sentencia
 ;
-sentencia:identificador {if(yyleng>32)yyerror("ERROR SEMANTICO POR EXCESO DE CARACTERES\n");guardarIdentificador(TS,&espaciosOcupado);} ASIGNACION expresion PUNTOCOMA
+sentencia:identificador {guardarIdentificador(TS,&espaciosOcupado);} ASIGNACION expresion PUNTOCOMA
 |LEER PARENTESISIZQUIERDO listaidentificadores PARENTESISDERECHO PUNTOCOMA
 |ESCRIBIR PARENTESISIZQUIERDO listaexpresiones PARENTESISDERECHO PUNTOCOMA
 ;
@@ -57,7 +57,7 @@ primaria:identificador {existeElID(TS,espaciosOcupado);}
 operadoraditivo:MAS
 |RESTA
 ;
-identificador:ID
+identificador:ID {if(yyleng>32)yyerror("ERROR SEMANTICO POR EXCESO DE CARACTERES\n");}
 ;
 %%
 int main(){

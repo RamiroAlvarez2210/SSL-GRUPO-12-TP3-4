@@ -1410,7 +1410,7 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 40 "microbison.y"
-    {if(yyleng>32)yyerror("ERROR SEMANTICO POR EXCESO DE CARACTERES\n");guardarIdentificador(TS,&espaciosOcupado);}
+    {guardarIdentificador(TS,&espaciosOcupado);}
     break;
 
   case 16:
@@ -1420,10 +1420,17 @@ yyreduce:
     {existeElID(TS,espaciosOcupado);}
     break;
 
+  case 21:
+
+/* Line 1455 of yacc.c  */
+#line 60 "microbison.y"
+    {if(yyleng>32)yyerror("ERROR SEMANTICO POR EXCESO DE CARACTERES\n");}
+    break;
+
 
 
 /* Line 1455 of yacc.c  */
-#line 1427 "y.tab.c"
+#line 1434 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
